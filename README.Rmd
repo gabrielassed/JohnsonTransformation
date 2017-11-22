@@ -1,27 +1,35 @@
+---
+output: github_document
+---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-"
+)
+```
+
 # Johnson
 
-Johnson transforms to normality using the Z family of distributions. It
-performs the Johnson Transformation based on the method of the
-percentiles. It includes the Anderson-Darling Test.
+Johnson transforms to normality using the Z family of distributions. It performs the Johnson Transformation based on the method of the percentiles. It includes the Anderson-Darling Test.
 
-NOTE: This is a mod for a nigh-abandoned CRAN package to help answer
-<https://stackoverflow.com/questions/47434667/r-ne-johnson-package-error-in-re-adtxsl-i-object-p-not-found>.
+NOTE: This is a mod for a nigh-abandoned CRAN package to help answer <https://stackoverflow.com/questions/47434667/r-ne-johnson-package-error-in-re-adtxsl-i-object-p-not-found>.
 
 ## Installation
 
 You can install Johnson from github with:
 
-``` r
+```{r gh-installation, eval = FALSE}
 # install.packages("devtools")
 devtools::install_github("hrbrmstr/Johnson")
 ```
 
-## The SO’s problem, resolved:
+## The SO's problem, resolved:
 
-``` r
+```{r example}
 library(Johnson)
 
 c(0.0000000, 0.0000000, 0.0000000, 0.0000000, 0.0000000, 0.0000000, 0.0000000,
@@ -44,13 +52,4 @@ c(0.0000000, 0.0000000, 0.0000000, 0.0000000, 0.0000000, 0.0000000, 0.0000000,
 32.2033898, 39.9159664) -> incorrectrecallpercent
 
 str(RE.Johnson(incorrectrecallpercent))
-#> List of 8
-#>  $            : chr "Johnson Transformation"
-#>  $ function   : chr "SB"
-#>  $ p          : num 0.00058
-#>  $ transformed: num [1:118] -1.08 -1.08 -1.08 -1.08 -1.08 ...
-#>  $ f.gamma    : num 2.65
-#>  $ f.lambda   : num 112
-#>  $ f.epsilon  : num -0.921
-#>  $ f.eta      : num 0.778
 ```
