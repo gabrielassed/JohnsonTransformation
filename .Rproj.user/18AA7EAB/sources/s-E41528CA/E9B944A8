@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1511353737423.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1908932022",
+    "id" : "E9B944A8",
+    "lastKnownWriteTime" : 1511354253,
+    "last_content_update" : 1511354253195,
+    "path" : "~/Development/Johnson/R/RE.Johnson.R",
+    "project_path" : "R/RE.Johnson.R",
+    "properties" : {
+        "cursorPosition" : "114,5",
+        "scrollLine" : "86"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
