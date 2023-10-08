@@ -29,7 +29,7 @@ RE.ADT <- function(x) {
     ))
   )
 
-  outList <- list("Anderson-Darling Test", p = p)
+  outList <- list("Anderson-Darling Test", p = p, ad = AD2)
 
   invisible(outList)
 }

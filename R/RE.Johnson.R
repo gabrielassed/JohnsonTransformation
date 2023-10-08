@@ -39,6 +39,10 @@ RE.Johnson <-
     xsl.adtest <- matrix(0, 1, 101)
     xsu.adtest <- matrix(0, 1, 101)
 
+    xsb.advalue <- matrix(0, 1, 101)
+    xsl.advalue <- matrix(0, 1, 101)
+    xsu.advalue <- matrix(0, 1, 101)
+
     f.gamma <- 0
     f.lambda <- 0
     f.epsilon <- 0
@@ -95,19 +99,28 @@ RE.Johnson <-
       }
 
       if (xsb.valida[1, i] == 0 & any(xsb[, i] != xsb[1, i])) {
-        xsb.adtest[1, i] <- (RE.ADT(xsb[, i])$p)
+        test <- RE.ADT(xsb[, i])
+        xsb.adtest[1, i] <- test$p
+        xsb.advalue[1, i] <- test$ad
       } else {
         xsb.adtest[1, i] <- 0
+        xsb.advalue[1, i] <- 0
       }
       if (xsl.valida[1, i] == 0 & any(xsl[, i] != xsl[1, i])) {
-        xsl.adtest[1, i] <- (RE.ADT(xsl[, i])$p)
+        test <- RE.ADT(xsl[, i])
+        xsl.adtest[1, i] <- test$p
+        xsl.advalue[1, i] <- test$ad
       } else {
         xsl.adtest[1, i] <- 0
+        xsl.advalue[1, i] <- 0
       }
       if (xsu.valida[1, i] == 0 & any(xsu[, i] != xsu[1, i])) {
-        xsu.adtest[1, i] <- (RE.ADT(xsu[, i])$p)
+        test <- RE.ADT(xsu[, i])
+        xsu.adtest[1, i] <- test$p
+        xsu.advalue[1, i] <- test$ad
       } else {
         xsu.adtest[1, i] <- 0
+        xsu.advalue[1, i] <- 0
       }
 
       # if(xsb.valida[1,i]==0) xsb.adtest[1,i]<-(RE.ADT(xsb[,i])$p)
@@ -123,7 +136,9 @@ RE.Johnson <-
 
     ifelse((max(xsb.adtest) > max(xsl.adtest) & max(xsb.adtest) > max(xsu.adtest)),
       {
-        p <- max(xsb.adtest)
+        p.index <- which.max(xsb.adtest)
+        p <- xsb.adtest[p.index]
+        ad <- xsb.advalue[p.index]
         fun <- "SB"
         transformed <- xsb[, max.col(xsb.adtest)]
         f.gamma <- b.gamma[max.col(xsb.adtest)]
@@ -133,7 +148,9 @@ RE.Johnson <-
       },
       ifelse(max(xsl.adtest) > max(xsu.adtest),
         {
-          p <- max(xsl.adtest)
+          p.index <- which.max(xsl.adtest)
+          p <- xsl.adtest[p.index]
+          ad <- xsl.advalue[p.index]
           fun <- "SL"
           transformed <- xsl[, max.col(xsl.adtest)]
           f.gamma <- l.gamma[max.col(xsl.adtest)]
@@ -142,7 +159,9 @@ RE.Johnson <-
           f.eta <- l.eta[max.col(xsl.adtest)]
         },
         {
-          p <- max(xsu.adtest)
+          p.index <- which.max(xsu.adtest)
+          p <- xsu.adtest[p.index]
+          ad <- xsu.advalue[p.index]
           fun <- "SU"
           transformed <- xsu[, max.col(xsu.adtest)]
           f.gamma <- u.gamma[max.col(xsu.adtest)]
@@ -153,6 +172,6 @@ RE.Johnson <-
       )
     )
 
-    outList <- list("Johnson Transformation", "function" = fun, p = p, transformed = transformed, f.gamma = f.gamma, f.lambda = f.lambda, f.epsilon = f.epsilon, f.eta = f.eta)
+    outList <- list("Johnson Transformation", "function" = fun, p = p, ad = ad, transformed = transformed, f.gamma = f.gamma, f.lambda = f.lambda, f.epsilon = f.epsilon, f.eta = f.eta)
     invisible(outList)
   }
