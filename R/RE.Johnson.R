@@ -145,6 +145,8 @@ RE.Johnson <-
         f.lambda <- b.lambda[max.col(xsb.adtest)]
         f.epsilon <- b.epsilon[max.col(xsb.adtest)]
         f.eta <- b.eta[max.col(xsb.adtest)]
+        formula <- RE.Formula(method = "SB")
+        formula.values <- RE.Formula(method = "SB", use_values = list(gamma = f.gamma, eta = f.eta, lambda = f.lambda, epsilon = f.epsilon))
       },
       ifelse(max(xsl.adtest) > max(xsu.adtest),
         {
@@ -157,6 +159,8 @@ RE.Johnson <-
           f.lambda <- l.lambda[max.col(xsl.adtest)]
           f.epsilon <- l.epsilon[max.col(xsl.adtest)]
           f.eta <- l.eta[max.col(xsl.adtest)]
+          formula <- RE.Formula(method = "SL")
+          formula.values <- RE.Formula(method = "SL", use_values = list(gamma = f.gamma, eta = f.eta, lambda = f.lambda, epsilon = f.epsilon))
         },
         {
           p.index <- which.max(xsu.adtest)
@@ -168,10 +172,24 @@ RE.Johnson <-
           f.lambda <- u.lambda[max.col(xsu.adtest)]
           f.epsilon <- u.epsilon[max.col(xsu.adtest)]
           f.eta <- u.eta[max.col(xsu.adtest)]
+          formula <- RE.Formula(method = "SU")
+          formula.values <- RE.Formula(method = "SU", use_values = list(gamma = f.gamma, eta = f.eta, lambda = f.lambda, epsilon = f.epsilon))
         }
       )
     )
 
-    outList <- list("Johnson Transformation", "function" = fun, p = p, ad = ad, transformed = transformed, f.gamma = f.gamma, f.lambda = f.lambda, f.epsilon = f.epsilon, f.eta = f.eta)
+    outList <- list(
+      "Johnson Transformation",
+      "function" = fun,
+      p = p,
+      ad = ad,
+      transformed = transformed,
+      f.gamma = f.gamma,
+      f.lambda = f.lambda,
+      f.epsilon = f.epsilon,
+      f.eta = f.eta,
+      formula = formula,
+      formula.values = formula.values
+    )
     invisible(outList)
   }
