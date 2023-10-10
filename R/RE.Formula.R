@@ -23,3 +23,23 @@ RE.Formula <- function(method = c("SB", "SL", "SU"), use_values = NULL) {
 
     return(formula)
 }
+
+RE.ApplyFormula <- function(x, johnson_test) {
+    method <- johnson_test[["function"]]
+    gamma <- johnson_test[["f.gamma"]]
+    eta <- johnson_test[["f.eta"]]
+    lambda <- johnson_test[["f.lambda"]]
+    epsilon <- johnson_test[["f.epsilon"]]
+
+    if (method == "SB") {
+        transformed <- gamma + eta * log((x - epsilon) / (lambda + epsilon - x))
+    } else if (method == "SL") {
+        transformed <- gamma + eta * log(x - epsilon)
+    } else if (method == "SU") {
+        transformed <- gamma + eta * asinh((x - epsilon) / lambda)
+    } else {
+        stop("method must be one of 'SB', 'SL', or 'SU'")
+    }
+
+    return(transformed)
+}
