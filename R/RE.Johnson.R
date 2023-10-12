@@ -98,7 +98,7 @@ RE.Johnson <-
         ifelse(((xu[i] * xl[i] / (xm[i]^2)) - 1) < 0, xsu.valida[1, i] <- xsu.valida[1, i] + 1, xsu[o, i] <- u.gamma[i] + u.eta[i] * asinh((x[o] - u.epsilon[i]) / u.lambda[i]))
       }
 
-      if (xsb.valida[1, i] == 0 & any(xsb[, i] != xsb[1, i])) {
+      if (xsb.valida[1, i] == 0 & isTRUE(any(xsb[, i] != xsb[1, i]))) {
         test <- RE.ADT(xsb[, i])
         xsb.adtest[1, i] <- test$p
         xsb.advalue[1, i] <- test$ad
@@ -106,7 +106,7 @@ RE.Johnson <-
         xsb.adtest[1, i] <- 0
         xsb.advalue[1, i] <- 0
       }
-      if (xsl.valida[1, i] == 0 & any(xsl[, i] != xsl[1, i])) {
+      if (xsl.valida[1, i] == 0 & isTRUE(any(xsl[, i] != xsl[1, i]))) {
         test <- RE.ADT(xsl[, i])
         xsl.adtest[1, i] <- test$p
         xsl.advalue[1, i] <- test$ad
@@ -114,7 +114,7 @@ RE.Johnson <-
         xsl.adtest[1, i] <- 0
         xsl.advalue[1, i] <- 0
       }
-      if (xsu.valida[1, i] == 0 & any(xsu[, i] != xsu[1, i])) {
+      if (xsu.valida[1, i] == 0 & isTRUE(any(xsu[, i] != xsu[1, i]))) {
         test <- RE.ADT(xsu[, i])
         xsu.adtest[1, i] <- test$p
         xsu.advalue[1, i] <- test$ad
